@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#087f8c">
 <title>Piscina Pro — Calculadora para Piscineiros</title>
+
 <style>
 :root {
   color-scheme: light dark;
@@ -20,21 +21,26 @@
   --warn: light-dark(#fff4dc,#46351a);
   --danger: light-dark(#ffebeb,#48282b);
 }
+
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
   font: 15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;
 }
+
 button,input,select { font: inherit; }
 button { cursor: pointer; }
+
 header {
   background: linear-gradient(125deg,#075b78,#0a9a9c);
   color: white;
   padding: 26px 20px 28px;
   border-radius: 0 0 26px 26px;
 }
+
 header .eyebrow {
   font-size: 11px;
   font-weight: 800;
@@ -42,9 +48,22 @@ header .eyebrow {
   text-transform: uppercase;
   opacity: .85;
 }
+
 h1 { font-size: 28px; line-height: 1.12; margin: 8px 0; }
-header p { margin: 8px 0 0; max-width: 550px; color: #d7f3f5; font-size: 14px; }
-.wrap { max-width: 780px; margin: auto; padding: 18px 15px 42px; }
+
+header p {
+  margin: 8px 0 0;
+  max-width: 550px;
+  color: #d7f3f5;
+  font-size: 14px;
+}
+
+.wrap {
+  max-width: 780px;
+  margin: auto;
+  padding: 18px 15px 42px;
+}
+
 .volume-card,.panel,.notice {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -53,97 +72,253 @@ header p { margin: 8px 0 0; max-width: 550px; color: #d7f3f5; font-size: 14px; }
   margin-bottom: 14px;
   box-shadow: 0 3px 12px #001e2a0a;
 }
-.section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
 .ico {
-  width: 43px; height: 43px; border-radius: 13px;
-  background: var(--teal2); display: grid; place-items: center;
-  font-size: 22px; flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  background: var(--teal2);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  flex-shrink: 0;
 }
+
 .section-head h2 { font-size: 18px; margin: 0; }
-.sub { color: var(--muted); font-size: 12px; margin-top: 3px; }
-.field-label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-.input-row { display: flex; align-items: center; gap: 10px; }
-.input-row input { flex: 1; min-width: 0; }
-.unit { color: var(--muted); font-size: 13px; white-space: nowrap; }
-input,select {
-  color: var(--text); background: var(--bg);
-  border: 1px solid var(--border); border-radius: 11px;
-  padding: 12px; width: 100%; outline: none;
+
+.sub {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 3px;
 }
+
+.field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-row input { flex: 1; min-width: 0; }
+
+.unit {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+input,select {
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 12px;
+  width: 100%;
+  outline: none;
+}
+
 input:focus,select:focus {
   border-color: var(--teal);
   box-shadow: 0 0 0 3px #087f8c22;
 }
-.tabs { display: flex; gap: 8px; margin: 18px 0 13px; }
-.tab {
-  flex: 1; border: 1px solid var(--border); border-radius: 12px;
-  background: var(--surface); color: var(--muted);
-  padding: 11px 7px; font-size: 13px; font-weight: 750;
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin: 18px 0 13px;
 }
-.tab.active { background: var(--teal2); border-color: var(--teal); color: var(--text); }
+
+.tab {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--muted);
+  padding: 11px 7px;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.tab.active {
+  background: var(--teal2);
+  border-color: var(--teal);
+  color: var(--text);
+}
+
 .product {
   display: grid;
   grid-template-columns: minmax(0,1fr) minmax(125px,.7fr);
-  gap: 12px; align-items: start; padding: 14px 0;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 0;
   border-top: 1px solid var(--border);
 }
+
 .product strong { display: block; font-size: 14px; }
-.product small { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
-.dose-input { display: flex; align-items: center; gap: 6px; }
+
+.product small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.dose-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .dose-input input { padding: 10px; min-width: 0; }
-.dose-input span { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+.dose-input span {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
 .result {
-  background: var(--teal2); border-radius: 11px;
-  padding: 10px 12px; margin-top: 8px; font-size: 13px;
+  background: var(--teal2);
+  border-radius: 11px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  font-size: 13px;
   overflow-wrap: anywhere;
 }
+
 .result b { font-size: 16px; color: var(--teal); }
-.result .muted { font-size: 11px; color: var(--muted); margin-top: 3px; }
-.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.btn {
-  border: 0; border-radius: 11px; background: #087f8c; color: #fff;
-  font-weight: 700; padding: 12px 15px;
-  width: 100%; margin-top: 10px;
+
+.result .muted {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 5px;
 }
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.three {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 10px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 11px;
+  background: #087f8c;
+  color: #fff;
+  font-weight: 700;
+  padding: 12px 15px;
+  width: 100%;
+  margin-top: 10px;
+}
+
 .btn.secondary {
-  background: var(--surface2); color: var(--text);
+  background: var(--surface2);
+  color: var(--text);
   border: 1px solid var(--border);
 }
+
 .btn.danger { background: #a72d35; color: white; }
-.notice { background: var(--warn); border-color: transparent; box-shadow: none; font-size: 13px; }
-.notice strong { display: block; margin-bottom: 4px; }
-.notice ul { padding-left: 18px; margin: 7px 0; }
-.notice p { margin: 5px 0; }
-.hidden { display: none !important; }
-.foot { font-size: 11px; color: var(--muted); text-align: center; padding: 10px 5px; }
-.tag {
-  display: inline-block; background: var(--surface2); border-radius: 6px;
-  padding: 3px 7px; font-size: 10px; font-weight: 800;
-  color: var(--muted); text-transform: uppercase;
-  letter-spacing: .05em; margin-bottom: 9px;
+
+.notice {
+  background: var(--warn);
+  border-color: transparent;
+  box-shadow: none;
+  font-size: 13px;
 }
+
+.notice strong { display: block; margin-bottom: 4px; }
+
+.notice ul { padding-left: 18px; margin: 7px 0; }
+
+.notice p { margin: 5px 0; }
+
+.hidden { display: none !important; }
+
+.foot {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  padding: 10px 5px;
+}
+
+.tag {
+  display: inline-block;
+  background: var(--surface2);
+  border-radius: 6px;
+  padding: 3px 7px;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 9px;
+}
+
 #ppm .product { grid-template-columns: 1fr; }
+
 #ppm .product .result { margin-top: 10px; }
+
 .reading {
   padding: 10px 0;
   border-bottom: 1px solid var(--border);
   font-size: 12px;
   overflow-wrap: anywhere;
 }
+
 .reading:last-child { border-bottom: 0; }
+
+.calc-box {
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 13px;
+  margin-top: 12px;
+}
+
+.calc-box h3 { font-size: 14px; margin: 0 0 12px; }
+
+.calc-box .sub { margin-bottom: 10px; }
+
+.calc-box label { margin-top: 8px; }
+
+.calc-box .result { margin-top: 12px; }
+
 @media(max-width:480px) {
   header { padding: 23px 17px 25px; }
   h1 { font-size: 25px; }
   .wrap { padding: 14px 11px 30px; }
   .volume-card,.panel,.notice { padding: 14px; }
-  .product { grid-template-columns: minmax(0,1fr) minmax(112px,.75fr); gap: 8px; }
-  .two { grid-template-columns: 1fr; }
+  .product {
+    grid-template-columns: minmax(0,1fr) minmax(112px,.75fr);
+    gap: 8px;
+  }
+  .two,.three { grid-template-columns: 1fr; }
   .tabs { flex-wrap: wrap; }
   .tab { flex: 1 1 42%; }
 }
 </style>
 </head>
+
 <body>
+
 <header>
   <div class="eyebrow">Ferramenta para piscineiros</div>
   <h1>Piscina Pro <span style="font-size:22px">〰</span></h1>
@@ -151,6 +326,7 @@ input:focus,select:focus {
 </header>
 
 <main class="wrap">
+
   <div class="volume-card">
     <div class="section-head">
       <div class="ico">💧</div>
@@ -159,16 +335,19 @@ input:focus,select:focus {
         <div class="sub">Informe o volume em mil litros. Os cálculos são atualizados automaticamente.</div>
       </div>
     </div>
+
     <label class="field-label" for="volume">Volume de água</label>
     <div class="input-row">
       <input id="volume" type="number" min="0.1" step="any" value="20" inputmode="decimal">
       <span class="unit">mil litros (m³)</span>
     </div>
+
     <div class="sub" style="margin-top:7px">
       Exemplo: 20 = 20.000 litros. Para uma piscina retangular:
       comprimento × largura × profundidade média × 1.000.
       Para formatos irregulares, o resultado é uma estimativa.
     </div>
+
     <div id="volumeAlert" class="sub" role="status"></div>
   </div>
 
@@ -179,7 +358,10 @@ input:focus,select:focus {
     <button class="tab" data-tab="ppm" role="tab" aria-selected="false">📏 PPM</button>
   </div>
 
+  <!-- TRATAMENTO -->
+
   <section id="tratamento" class="panel">
+
     <div class="section-head">
       <div class="ico">🧪</div>
       <div>
@@ -187,17 +369,23 @@ input:focus,select:focus {
         <div class="sub">Informe a dose indicada no rótulo para cada produto.</div>
       </div>
     </div>
+
     <div class="notice">
       <strong>Como interpretar o resultado</strong>
       A calculadora multiplica a dose do rótulo pelo volume em milhares de litros.
       Ela não determina sozinha se o produto é necessário nem se é compatível com
       o tratamento atual. Confirme a composição, a finalidade e as instruções da embalagem.
     </div>
+
     <div id="products"></div>
+
     <button id="reset" class="btn secondary">Limpar doses configuradas</button>
   </section>
 
+  <!-- CLORO -->
+
   <section id="cloro" class="panel hidden">
+
     <div class="section-head">
       <div class="ico">🛡️</div>
       <div>
@@ -227,6 +415,7 @@ input:focus,select:focus {
         <input id="doseCloro" type="number" min="0" step="any" placeholder="Ex.: 5">
         <div class="sub">Copie o valor da embalagem.</div>
       </div>
+
       <div>
         <label class="field-label" for="unidadeCloro">Unidade da dose</label>
         <select id="unidadeCloro">
@@ -246,6 +435,7 @@ input:focus,select:focus {
         <label class="field-label" for="cloroLivre">Cloro livre medido (ppm)</label>
         <input id="cloroLivre" type="number" min="0" step="any" placeholder="Ex.: 2">
       </div>
+
       <div>
         <label class="field-label" for="ph">pH medido</label>
         <input id="ph" type="number" min="0" max="14" step="any" placeholder="Ex.: 7.4">
@@ -262,11 +452,16 @@ input:focus,select:focus {
     </div>
 
     <button id="saveReading" class="btn">Salvar medição neste aparelho</button>
+
     <div id="savedReadings" aria-live="polite" style="margin-top:12px"></div>
+
     <button id="clearReadings" class="btn secondary">Apagar histórico salvo</button>
   </section>
 
+  <!-- CONTROLE DA ÁGUA -->
+
   <section id="agua" class="panel hidden">
+
     <div class="section-head">
       <div class="ico">📋</div>
       <div>
@@ -281,24 +476,28 @@ input:focus,select:focus {
         <small>São parâmetros fundamentais para a desinfecção. Teste com um kit adequado e ajuste conforme as orientações aplicáveis.</small>
       </div>
     </div>
+
     <div class="product">
       <div>
         <strong>Ácido cianúrico (estabilizante)</strong>
         <small>Pode se acumular com o uso de cloros estabilizados, como tricloro e dicloro. A concentração elevada pode afetar a ação desinfetante. Meça quando aplicável.</small>
       </div>
     </div>
+
     <div class="product">
       <div>
         <strong>Alcalinidade total</strong>
         <small>Ajuda a controlar a estabilidade do pH. Corrija com base em uma medição e na dose específica do produto.</small>
       </div>
     </div>
+
     <div class="product">
       <div>
         <strong>Dureza cálcica</strong>
         <small>Ajuda a avaliar o risco de incrustações ou de água agressiva aos materiais. A faixa adequada depende da piscina e da água.</small>
       </div>
     </div>
+
     <div class="product">
       <div>
         <strong>Metais e sólidos dissolvidos</strong>
@@ -329,12 +528,15 @@ input:focus,select:focus {
     </div>
   </section>
 
+  <!-- CALCULADORA PPM -->
+
   <section id="ppm" class="panel hidden">
+
     <div class="section-head">
       <div class="ico">📏</div>
       <div>
         <h2>Calculadora de PPM</h2>
-        <div class="sub">Entenda a diferença entre a leitura atual e a meta desejada.</div>
+        <div class="sub">Calcule a diferença entre a leitura atual e a meta e estime a quantidade de produto necessária.</div>
       </div>
     </div>
 
@@ -342,90 +544,273 @@ input:focus,select:focus {
       <strong>O que significa PPM?</strong>
       PPM significa partes por milhão. Em água, para concentrações diluídas,
       1 ppm é aproximadamente igual a 1 mg/L. A diferença entre a leitura e a
-      meta mostra quanto o parâmetro precisa mudar, mas não é automaticamente
-      a dose em gramas de qualquer produto.
+      meta mostra quanto o parâmetro precisa mudar. Para estimar gramas ou mililitros,
+      também precisamos da dosagem indicada no rótulo do produto.
     </div>
 
     <div class="notice">
-      <strong>Antes de adicionar produtos</strong>
+      <strong>Como usar a calculadora de dosagem</strong>
       <ul>
-        <li>Confirme a leitura com um teste adequado e dentro da validade.</li>
-        <li>Use uma meta compatível com a piscina, o revestimento e o equipamento.</li>
-        <li>Consulte o rótulo do produto corretivo antes de calcular ou aplicar uma dose.</li>
-        <li>Se a leitura estiver acima da meta, não adicione um elevador para aquele parâmetro.</li>
+        <li>Informe a leitura atual e a meta desejada.</li>
+        <li>Copie do rótulo a quantidade recomendada e o volume de referência.</li>
+        <li>Informe quantos ppm essa dose aumenta, conforme o rótulo ou a informação técnica do fabricante.</li>
+        <li>A calculadora estima a quantidade proporcional para o volume da piscina.</li>
+        <li>Aplique conforme o rótulo e meça novamente antes de fazer outro ajuste.</li>
       </ul>
     </div>
+
+    <!-- ALCALINIDADE -->
 
     <div class="product">
       <div>
         <strong>Alcalinidade total</strong>
-        <small>Uma faixa frequentemente utilizada é 80–120 ppm, mas a meta depende do sistema e da orientação do fabricante. A alcalinidade influencia a estabilidade do pH.</small>
+        <small>
+          Uma faixa frequentemente utilizada é 80–120 ppm, mas a meta depende do
+          sistema e da orientação do fabricante. A alcalinidade influencia a estabilidade do pH.
+        </small>
       </div>
+
       <div class="two">
         <div>
           <label class="field-label" for="alkPpm">Leitura atual (ppm)</label>
-          <input id="alkPpm" type="number" min="0" step="any" placeholder="Ex.: 60">
+          <input id="alkPpm" type="number" min="0" step="any" placeholder="Ex.: 50">
         </div>
+
         <div>
           <label class="field-label" for="alkMeta">Meta desejada (ppm)</label>
-          <input id="alkMeta" type="number" min="0" step="any" value="100">
+          <input id="alkMeta" type="number" min="0" step="any" value="80">
         </div>
       </div>
-      <div class="result" id="alkResult" role="status">Informe a leitura atual e a meta.</div>
+
+      <div class="result" id="alkResult" role="status">
+        Informe a leitura atual e a meta.
+      </div>
+
+      <div class="calc-box">
+        <h3>🧮 Cálculo da dose do elevador de alcalinidade</h3>
+
+        <div class="sub">
+          Preencha com os dados da embalagem do produto que você vai utilizar.
+        </div>
+
+        <div class="two">
+          <div>
+            <label class="field-label" for="alkDose">Quantidade indicada no rótulo</label>
+            <input id="alkDose" type="number" min="0" step="any" placeholder="Ex.: 170">
+          </div>
+
+          <div>
+            <label class="field-label" for="alkUnit">Unidade do produto</label>
+            <select id="alkUnit">
+              <option value="g">Gramas (g)</option>
+              <option value="ml">Mililitros (mL)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="two">
+          <div>
+            <label class="field-label" for="alkBaseVolume">Volume de referência do rótulo (L)</label>
+            <input id="alkBaseVolume" type="number" min="1" step="any" value="10000">
+          </div>
+
+          <div>
+            <label class="field-label" for="alkIncrease">Aumento indicado pela dose (ppm)</label>
+            <input id="alkIncrease" type="number" min="0.01" step="any" value="10">
+          </div>
+        </div>
+
+        <div class="sub">
+          Exemplo ilustrativo: se o rótulo disser que 170 g aumentam a alcalinidade
+          em 10 ppm para cada 10.000 L, informe esses três valores. Não utilize
+          valores ilustrativos no lugar das instruções do seu produto.
+        </div>
+
+        <div class="result" id="alkDoseResult" role="status">
+          Informe a leitura, a meta e os dados da dosagem do rótulo para calcular.
+        </div>
+      </div>
     </div>
+
+    <!-- SALINIDADE -->
 
     <div class="product">
       <div>
-        <strong>Sal — somente para gerador de cloro salino</strong>
-        <small>A meta varia conforme o modelo. Muitos equipamentos trabalham na faixa aproximada de 3.000–4.000 ppm, mas o manual do fabricante é quem determina a faixa correta.</small>
+        <strong>Salinidade — para piscina com gerador de cloro salino</strong>
+        <small>
+          Informe a salinidade medida e a meta recomendada no manual do equipamento.
+          Muitos geradores trabalham aproximadamente entre 3.000 e 4.000 ppm,
+          mas essa faixa não é universal.
+        </small>
       </div>
+
       <div class="two">
         <div>
-          <label class="field-label" for="saltPpm">Leitura atual (ppm)</label>
-          <input id="saltPpm" type="number" min="0" step="any" placeholder="Ex.: 2500">
+          <label class="field-label" for="saltPpm">Salinidade atual (ppm)</label>
+          <input
+            id="saltPpm"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Ex.: 2500"
+            inputmode="decimal"
+          >
         </div>
+
         <div>
-          <label class="field-label" for="saltMeta">Meta do fabricante (ppm)</label>
-          <input id="saltMeta" type="number" min="0" step="any" value="3500">
+          <label class="field-label" for="saltMeta">Salinidade desejada (ppm)</label>
+          <input
+            id="saltMeta"
+            type="number"
+            min="0"
+            step="any"
+            value="3500"
+            inputmode="decimal"
+          >
         </div>
       </div>
-      <div class="result" id="saltResult" role="status">Informe a leitura atual e a meta.</div>
+
+      <div class="calc-box">
+        <h3>🧂 Calculadora da quantidade de sal</h3>
+
+        <div class="sub">
+          O volume da piscina é aproveitado do campo principal, no início da página.
+          Não é necessário informar o volume novamente.
+        </div>
+
+        <div class="result" id="saltResult" role="status" aria-live="polite">
+          Informe a salinidade atual e a desejada para calcular a quantidade estimada de sal.
+        </div>
+
+        <div class="notice" style="margin-top:12px;margin-bottom:0">
+          <strong>Antes de adicionar sal</strong>
+          <ul>
+            <li>Confirme a meta no manual do gerador de cloro salino.</li>
+            <li>Use sal compatível com o equipamento e com a piscina.</li>
+            <li>O cálculo considera sal puro; a quantidade real pode variar conforme a pureza do produto e as condições da água.</li>
+            <li>Se a salinidade já estiver acima da meta, não adicione mais sal para tentar corrigir.</li>
+            <li>Siga o procedimento de dissolução, circulação e aplicação indicado pelo fabricante.</li>
+            <li>Meça novamente antes de realizar outra correção.</li>
+          </ul>
+        </div>
+      </div>
     </div>
+
+    <!-- DUREZA CÁLCICA -->
 
     <div class="product">
       <div>
         <strong>Dureza cálcica</strong>
-        <small>Uma faixa de referência comum é cerca de 200–400 ppm, mas o valor adequado depende do revestimento, da composição da água e do equipamento. Valores inadequados podem favorecer corrosão, depósitos ou incrustações.</small>
+        <small>
+          Uma faixa de referência comum é cerca de 200–400 ppm, mas o valor adequado
+          depende do revestimento, da composição da água e do equipamento.
+        </small>
       </div>
+
       <div class="two">
         <div>
           <label class="field-label" for="hardPpm">Leitura atual (ppm)</label>
           <input id="hardPpm" type="number" min="0" step="any" placeholder="Ex.: 150">
         </div>
+
         <div>
           <label class="field-label" for="hardMeta">Meta desejada (ppm)</label>
           <input id="hardMeta" type="number" min="0" step="any" value="250">
         </div>
       </div>
-      <div class="result" id="hardResult" role="status">Informe a leitura atual e a meta.</div>
+
+      <div class="result" id="hardResult" role="status">
+        Informe a leitura atual e a meta.
+      </div>
+
+      <div class="calc-box">
+        <h3>🧮 Cálculo da dose do produto para dureza cálcica</h3>
+
+        <div class="sub">
+          Utilize esta calculadora somente se a embalagem ou a documentação
+          técnica informar uma dosagem correspondente ao aumento de dureza.
+        </div>
+
+        <div class="two">
+          <div>
+            <label class="field-label" for="hardDose">Quantidade indicada no rótulo</label>
+            <input id="hardDose" type="number" min="0" step="any" placeholder="Ex.: 200">
+          </div>
+
+          <div>
+            <label class="field-label" for="hardUnit">Unidade do produto</label>
+            <select id="hardUnit">
+              <option value="g">Gramas (g)</option>
+              <option value="ml">Mililitros (mL)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="two">
+          <div>
+            <label class="field-label" for="hardBaseVolume">Volume de referência do rótulo (L)</label>
+            <input id="hardBaseVolume" type="number" min="1" step="any" value="10000">
+          </div>
+
+          <div>
+            <label class="field-label" for="hardIncrease">Aumento indicado pela dose (ppm)</label>
+            <input id="hardIncrease" type="number" min="0.01" step="any" value="10">
+          </div>
+        </div>
+
+        <div class="result" id="hardDoseResult" role="status">
+          Informe a leitura, a meta e os dados da dosagem do rótulo para calcular.
+        </div>
+      </div>
     </div>
 
     <div class="notice">
-      <strong>Como interpretar os resultados</strong>
-      <p><b>Alcalinidade:</b> a diferença em ppm não informa sozinha quantos gramas de elevador adicionar. Consulte a dose por volume no rótulo.</p>
-      <p><b>Sal:</b> a estimativa considera o volume informado, a diferença entre as leituras e sal puro. Pureza, água já presente no sistema e outras condições podem alterar a quantidade real necessária.</p>
-      <p><b>Dureza:</b> a diferença em ppm não é uma dose direta. Use um produto indicado para corrigir a dureza e siga sua embalagem.</p>
+      <strong>Importante sobre as estimativas</strong>
+      <p><b>Alcalinidade e dureza:</b> a quantidade estimada depende da formulação e da informação de dosagem do produto utilizado.</p>
+      <p><b>Salinidade:</b> o cálculo considera a diferença de ppm e o volume da piscina, estimando a massa de sal puro.</p>
+      <p><b>Todos os parâmetros:</b> os resultados são estimativas matemáticas. A resposta real da água pode variar. Siga as instruções de aplicação e faça nova medição antes de corrigir novamente.</p>
     </div>
+
   </section>
 
   <div class="foot">
     Ferramenta auxiliar. Não substitui testes confiáveis, rótulos, manuais,
     treinamento ou normas locais. Não aplique produtos apenas com base em uma estimativa.
   </div>
+
 </main>
 
 <script>
 'use strict';
+
+const $ = id => document.getElementById(id);
+
+const fmt = n => new Intl.NumberFormat('pt-BR', {
+  maximumFractionDigits: 2
+}).format(n);
+
+function readNumber(id) {
+  const raw = $(id).value.trim();
+
+  if (raw === '') return null;
+
+  const n = Number(raw);
+
+  if (!Number.isFinite(n)) return null;
+
+  return n;
+}
+
+function vol() {
+  const v = readNumber('volume');
+
+  if (v === null || v <= 0) return null;
+
+  // O campo principal é informado em milhares de litros.
+  return v;
+}
+
+/* Produtos de tratamento */
 
 const items = [
   {
@@ -465,36 +850,6 @@ const items = [
   }
 ];
 
-const $ = id => document.getElementById(id);
-
-const fmt = n => new Intl.NumberFormat('pt-BR', {
-  maximumFractionDigits: 2
-}).format(n);
-
-function readNumber(id) {
-  const raw = $(id).value.trim();
-
-  if (raw === '') return null;
-
-  const n = Number(raw);
-
-  if (!Number.isFinite(n)) return null;
-
-  return n;
-}
-
-function vol() {
-  const v = readNumber('volume');
-
-  if (v === null || v <= 0) return null;
-
-  return v;
-}
-
-function setResult(id, html) {
-  $(id).innerHTML = html;
-}
-
 function renderProducts() {
   $('products').innerHTML = items.map(p => `
     <div class="product">
@@ -529,8 +884,7 @@ function calcProducts() {
     : '';
 
   items.forEach(p => {
-    const input = $('dose-' + p.id);
-    const raw = input.value.trim();
+    const raw = $('dose-' + p.id).value.trim();
     const d = readNumber('dose-' + p.id);
     const out = $('out-' + p.id);
 
@@ -543,11 +897,16 @@ function calcProducts() {
     } else {
       out.innerHTML = `
         <b>${fmt(d * v)} ${p.unit}</b>
-        <div class="muted">Quantidade calculada para ${fmt(v * 1000)} litros. Confirme a aplicação no rótulo.</div>
+        <div class="muted">
+          Quantidade calculada para ${fmt(v * 1000)} litros.
+          Confirme a aplicação no rótulo.
+        </div>
       `;
     }
   });
 }
+
+/* Calculadora de cloro */
 
 function calcChlorine() {
   const d = readNumber('doseCloro');
@@ -561,16 +920,23 @@ function calcChlorine() {
     return;
   }
 
-  const unit = u === 'ml' ? 'mL' : u === 'g' ? 'g' : 'pastilhas';
+  const unit = u === 'ml'
+    ? 'mL'
+    : u === 'g'
+      ? 'g'
+      : 'pastilhas';
 
   $('cloroResult').innerHTML = `
     Quantidade calculada: <b>${fmt(d * v)} ${unit}</b>
     <div class="muted">
-      Base: ${fmt(d)} ${unit} por 1.000 L. Esse cálculo não prevê o aumento
-      do cloro livre em ppm. Confirme a composição, a unidade e as instruções da embalagem.
+      Base: ${fmt(d)} ${unit} por 1.000 L.
+      Esse cálculo não prevê o aumento do cloro livre em ppm.
+      Confirme a composição, a unidade e as instruções da embalagem.
     </div>
   `;
 }
+
+/* Alertas da água */
 
 function updateAlert() {
   const c = readNumber('cloroLivre');
@@ -599,15 +965,15 @@ function updateAlert() {
     } else if (p > 7.8) {
       notes.push('pH acima da faixa geral de referência 7,0–7,8. Confirme o teste e avalie a correção adequada.');
     } else {
-      notes.push('pH dentro da faixa geral de referência do CDC. Confira também a meta específica do seu sistema.');
+      notes.push('pH dentro da faixa geral de referência. Confira também a meta específica do seu sistema.');
     }
   }
 
   if (c !== null && cRaw !== '' && c >= 0) {
     if (c < 1) {
-      notes.push('Cloro livre abaixo de 1 ppm. Confirme a medição e verifique a exigência aplicável ao tratamento. Com estabilizante, o mínimo recomendado pelo CDC para piscinas é diferente.');
+      notes.push('Cloro livre abaixo de 1 ppm. Confirme a medição e verifique a exigência aplicável ao tratamento.');
     } else if (c > 5) {
-      notes.push('Cloro livre elevado em relação a muitas faixas operacionais comuns. Não libere a piscina sem confirmar o limite aplicável e a orientação do produto.');
+      notes.push('Cloro livre elevado em relação a muitas faixas operacionais comuns. Confirme o limite aplicável antes de liberar a piscina.');
     } else {
       notes.push('Compare o cloro medido com a faixa indicada para o produto, o estabilizante e a piscina.');
     }
@@ -615,6 +981,17 @@ function updateAlert() {
 
   $('waterAlert').textContent = notes.join(' ');
 }
+
+/*
+  CALCULADORA DE PPM E DOSE
+
+  Fórmula para alcalinidade e dureza:
+
+  quantidade necessária =
+    dose do rótulo
+    × (volume da piscina / volume de referência do rótulo)
+    × (aumento de ppm necessário / aumento de ppm informado no rótulo)
+*/
 
 function ppmResult(currentId, targetId, resultId, kind) {
   const c = readNumber(currentId);
@@ -624,7 +1001,9 @@ function ppmResult(currentId, targetId, resultId, kind) {
   const out = $(resultId);
 
   if (cRaw === '' || tRaw === '' || c === null || t === null) {
-    out.textContent = 'Informe a leitura atual e a meta.';
+    out.textContent = kind === 'salt'
+      ? 'Informe a salinidade atual e a desejada para calcular a quantidade estimada de sal.'
+      : 'Informe a leitura atual e a meta.';
     return;
   }
 
@@ -638,7 +1017,10 @@ function ppmResult(currentId, targetId, resultId, kind) {
   if (Math.abs(gap) < 0.0000001) {
     out.innerHTML = `
       <b>Leitura igual à meta informada.</b>
-      <div class="muted">Confirme a leitura e verifique se essa meta é adequada para sua piscina.</div>
+      <div class="muted">
+        Não é necessário adicionar produto para aumentar esse parâmetro.
+        Confirme a leitura e verifique se a meta é adequada para sua piscina.
+      </div>
     `;
     return;
   }
@@ -647,7 +1029,8 @@ function ppmResult(currentId, targetId, resultId, kind) {
     out.innerHTML = `
       <b>${fmt(Math.abs(gap))} ppm acima da meta</b>
       <div class="muted">
-        Não adicione um elevador para aumentar esse parâmetro.
+        A leitura está acima do valor desejado.
+        Não adicione produto para aumentar esse parâmetro.
         Confirme a medição e consulte a orientação técnica para reduzi-lo.
       </div>
     `;
@@ -660,62 +1043,229 @@ function ppmResult(currentId, targetId, resultId, kind) {
     if (v === null) {
       out.innerHTML = `
         <b>Faltam ${fmt(gap)} ppm</b>
-        <div class="muted">Informe um volume válido para estimar a massa de sal.</div>
+        <div class="muted">
+          Informe um volume válido maior que zero no início da página.
+        </div>
       `;
       return;
     }
 
-    // Volume em milhares de litros.
-    // gap (mg/L) × volume (milhares de litros) / 1.000
-    // = kg teóricos de sal puro.
-    const kg = gap * v / 1000;
+    /*
+      v está em milhares de litros.
+
+      Para água diluída:
+      1 ppm ≈ 1 mg/L.
+
+      Massa teórica em kg:
+      diferença em ppm × volume em litros ÷ 1.000.000.
+
+      Como v representa milhares de litros:
+      kg = diferença em ppm × v ÷ 1.000.
+    */
+
+    const poolLiters = v * 1000;
+    const saltKg = (gap * poolLiters) / 1000000;
+    const saltGrams = saltKg * 1000;
+
+    if (!Number.isFinite(saltKg) || saltKg <= 0) {
+      out.textContent = 'Não foi possível calcular. Confira os valores informados.';
+      return;
+    }
 
     out.innerHTML = `
-      <b>Faltam ${fmt(gap)} ppm</b>
+      <div>Salinidade atual: <b>${fmt(c)} ppm</b></div>
+      <div>Salinidade desejada: <b>${fmt(t)} ppm</b></div>
+      <div style="margin-top:8px">
+        Aumento necessário: <b>${fmt(gap)} ppm</b>
+      </div>
+
+      <div style="margin-top:12px">
+        Quantidade teórica de sal puro:
+      </div>
+
+      <b style="font-size:25px">${fmt(saltKg)} kg</b>
+
       <div class="muted">
-        Estimativa teórica: <b>${fmt(kg)} kg de sal puro</b>
-        para ${fmt(v * 1000)} litros.
-        Use somente em piscina com gerador de cloro salino.
-        Confirme a meta no manual, a leitura atual e a pureza do sal.
-        A estimativa não considera perdas ou outras incertezas de medição.
-        Adicione conforme o manual e reteste antes de ajustar novamente.
+        Equivalente a ${fmt(saltGrams)} gramas de sal puro.
+        Volume utilizado no cálculo: ${fmt(poolLiters)} litros.
+      </div>
+
+      <div class="muted">
+        Fórmula: ${fmt(gap)} ppm × ${fmt(poolLiters)} L ÷ 1.000.000
+        = ${fmt(saltKg)} kg.
+      </div>
+
+      <div class="muted">
+        Esta é uma estimativa matemática, não uma dose universal.
+        Confirme a meta no manual do gerador de cloro salino, a pureza do sal
+        e a leitura medida. Siga o procedimento do fabricante e reteste
+        antes de adicionar mais sal.
       </div>
     `;
-  } else if (kind === 'alk') {
-    out.innerHTML = `
-      <b>Faltam ${fmt(gap)} ppm</b>
-      <div class="muted">
-        Essa é a diferença de alcalinidade, não uma dose em gramas.
-        Consulte no rótulo do elevador de alcalinidade a quantidade por volume
-        e siga o procedimento de aplicação. Depois, meça novamente.
-      </div>
-    `;
-  } else {
-    out.innerHTML = `
-      <b>Faltam ${fmt(gap)} ppm</b>
-      <div class="muted">
-        Essa é a diferença de dureza cálcica, não uma dose direta.
-        Use somente produto indicado para corrigir a dureza e siga a dose
-        do fabricante. Depois, meça novamente.
-      </div>
-    `;
+    return;
   }
+
+  out.innerHTML = `
+    <b>Faltam ${fmt(gap)} ppm</b>
+    <div class="muted">
+      ${kind === 'alk'
+        ? 'Use os campos abaixo para estimar a quantidade de elevador de alcalinidade.'
+        : 'Use os campos abaixo para estimar a quantidade de produto para corrigir a dureza cálcica.'}
+      A estimativa depende dos dados de dosagem do fabricante.
+    </div>
+  `;
+}
+
+/*
+  Calcula a dose de produto para alcalinidade ou dureza cálcica.
+  A dose do rótulo pode ser em gramas ou mililitros.
+*/
+
+function calcCorrectionDose(prefix, currentId, targetId, resultId) {
+  const currentRaw = $(currentId).value.trim();
+  const targetRaw = $(targetId).value.trim();
+
+  const current = readNumber(currentId);
+  const target = readNumber(targetId);
+
+  const doseRaw = $(prefix + 'Dose').value.trim();
+  const dose = readNumber(prefix + 'Dose');
+
+  const baseVolume = readNumber(prefix + 'BaseVolume');
+  const increase = readNumber(prefix + 'Increase');
+
+  const unit = $(prefix + 'Unit').value;
+  const out = $(resultId);
+
+  if (currentRaw === '' || targetRaw === '') {
+    out.textContent = 'Informe a leitura atual e a meta desejada.';
+    return;
+  }
+
+  if (current === null || target === null || current < 0 || target < 0) {
+    out.textContent = 'Confira a leitura atual e a meta. Os valores não podem ser negativos.';
+    return;
+  }
+
+  const gap = target - current;
+
+  if (Math.abs(gap) < 0.0000001) {
+    out.innerHTML = `
+      <b>A leitura já corresponde à meta.</b>
+      <div class="muted">
+        Não é necessário calcular uma dose para aumentar esse parâmetro.
+        Confirme o resultado do teste.
+      </div>
+    `;
+    return;
+  }
+
+  if (gap < 0) {
+    out.innerHTML = `
+      <b>A leitura está ${fmt(Math.abs(gap))} ppm acima da meta.</b>
+      <div class="muted">
+        Esta calculadora estima somente doses para aumentar o parâmetro.
+        Não aplique um elevador com essa finalidade.
+      </div>
+    `;
+    return;
+  }
+
+  if (
+    doseRaw === '' ||
+    dose === null ||
+    baseVolume === null ||
+    increase === null
+  ) {
+    out.innerHTML = `
+      <b>Faltam ${fmt(gap)} ppm</b>
+      <div class="muted">
+        Preencha a quantidade indicada no rótulo, o volume de referência
+        e o aumento de ppm correspondente àquela dose.
+      </div>
+    `;
+    return;
+  }
+
+  if (
+    dose <= 0 ||
+    baseVolume <= 0 ||
+    increase <= 0
+  ) {
+    out.textContent =
+      'A dose, o volume de referência e o aumento de ppm precisam ser maiores que zero.';
+    return;
+  }
+
+  const v = vol();
+
+  if (v === null) {
+    out.textContent = 'Informe um volume válido para a piscina.';
+    return;
+  }
+
+  const poolLiters = v * 1000;
+
+  const quantity =
+    dose *
+    (poolLiters / baseVolume) *
+    (gap / increase);
+
+  if (!Number.isFinite(quantity) || quantity <= 0) {
+    out.textContent = 'Não foi possível calcular. Confira os valores informados.';
+    return;
+  }
+
+  const unitLabel = unit === 'g' ? 'g' : 'mL';
+
+  out.innerHTML = `
+    <div>Diferença a corrigir: <b>${fmt(gap)} ppm</b></div>
+    <div style="margin-top:8px">
+      Quantidade teórica calculada:
+    </div>
+    <b style="font-size:23px">${fmt(quantity)} ${unitLabel}</b>
+    <div class="muted">
+      Para ${fmt(poolLiters)} litros, usando os dados de dosagem
+      informados para o produto.
+      Essa é uma estimativa proporcional, não uma garantia do resultado final.
+      Siga o rótulo, faça a aplicação conforme as instruções e meça novamente
+      antes de considerar outra correção.
+    </div>
+  `;
 }
 
 function calcPpm() {
   ppmResult('alkPpm', 'alkMeta', 'alkResult', 'alk');
   ppmResult('saltPpm', 'saltMeta', 'saltResult', 'salt');
   ppmResult('hardPpm', 'hardMeta', 'hardResult', 'hard');
+
+  calcCorrectionDose(
+    'alk',
+    'alkPpm',
+    'alkMeta',
+    'alkDoseResult'
+  );
+
+  calcCorrectionDose(
+    'hard',
+    'hardPpm',
+    'hardMeta',
+    'hardDoseResult'
+  );
 }
+
+/* Histórico de medições */
 
 function saveReading() {
   const cRaw = $('cloroLivre').value.trim();
   const pRaw = $('ph').value.trim();
+
   const c = readNumber('cloroLivre');
   const p = readNumber('ph');
 
   if (cRaw === '' && pRaw === '') {
-    $('savedReadings').textContent = 'Informe ao menos uma medição antes de salvar.';
+    $('savedReadings').textContent =
+      'Informe ao menos uma medição antes de salvar.';
     return;
   }
 
@@ -735,44 +1285,23 @@ function saveReading() {
   };
 
   try {
-    const previous = JSON.parse(localStorage.getItem('piscinaProReadings') || '[]');
+    const previous = JSON.parse(
+      localStorage.getItem('piscinaProReadings') || '[]'
+    );
+
     const readings = Array.isArray(previous) ? previous : [];
+
     readings.unshift(entry);
 
-    // Mantém no máximo 50 registros neste navegador.
-    localStorage.setItem('piscinaProReadings', JSON.stringify(readings.slice(0, 50)));
+    localStorage.setItem(
+      'piscinaProReadings',
+      JSON.stringify(readings.slice(0, 50))
+    );
+
     renderReadings();
   } catch {
     $('savedReadings').textContent =
       'Não foi possível salvar no navegador. Verifique as configurações de armazenamento.';
-  }
-}
-
-function renderReadings() {
-  const container = $('savedReadings');
-
-  try {
-    const readings = JSON.parse(localStorage.getItem('piscinaProReadings') || '[]');
-
-    if (!Array.isArray(readings) || readings.length === 0) {
-      container.textContent = 'Nenhuma medição salva neste navegador.';
-      return;
-    }
-
-    container.innerHTML = '<strong>Histórico de medições</strong>' +
-      readings.map(r => {
-        const chlorine = r.chlorine === null ? '—' : fmt(r.chlorine) + ' ppm';
-        const ph = r.ph === null ? '—' : fmt(r.ph);
-
-        return `
-          <div class="reading">
-            <strong>${escapeHTML(r.date)}</strong><br>
-            Cloro livre: ${escapeHTML(chlorine)} · pH: ${escapeHTML(ph)}
-          </div>
-        `;
-      }).join('');
-  } catch {
-    container.textContent = 'Não foi possível ler o histórico salvo.';
   }
 }
 
@@ -786,22 +1315,60 @@ function escapeHTML(value) {
   })[char]);
 }
 
+function renderReadings() {
+  const container = $('savedReadings');
+
+  try {
+    const readings = JSON.parse(
+      localStorage.getItem('piscinaProReadings') || '[]'
+    );
+
+    if (!Array.isArray(readings) || readings.length === 0) {
+      container.textContent = 'Nenhuma medição salva neste navegador.';
+      return;
+    }
+
+    container.innerHTML = '<strong>Histórico de medições</strong>' +
+      readings.map(r => {
+        const chlorine =
+          r.chlorine === null ? '—' : fmt(r.chlorine) + ' ppm';
+
+        const ph =
+          r.ph === null ? '—' : fmt(r.ph);
+
+        return `
+          <div class="reading">
+            <strong>${escapeHTML(r.date)}</strong><br>
+            Cloro livre: ${escapeHTML(chlorine)} · pH: ${escapeHTML(ph)}
+          </div>
+        `;
+      }).join('');
+  } catch {
+    container.textContent = 'Não foi possível ler o histórico salvo.';
+  }
+}
+
 function clearReadings() {
-  if (!confirm('Deseja apagar todas as medições salvas neste navegador?')) return;
+  if (!confirm('Deseja apagar todas as medições salvas neste navegador?')) {
+    return;
+  }
 
   try {
     localStorage.removeItem('piscinaProReadings');
     renderReadings();
   } catch {
-    $('savedReadings').textContent = 'Não foi possível apagar o histórico.';
+    $('savedReadings').textContent =
+      'Não foi possível apagar o histórico.';
   }
 }
 
-/* Navegação entre as quatro abas. */
+/* Navegação entre abas */
+
 document.querySelectorAll('.tab').forEach(button => {
   button.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(tab => {
       const active = tab === button;
+
       tab.classList.toggle('active', active);
       tab.setAttribute('aria-selected', String(active));
     });
@@ -812,7 +1379,8 @@ document.querySelectorAll('.tab').forEach(button => {
   });
 });
 
-/* Atualização automática. */
+/* Atualização automática do volume */
+
 $('volume').addEventListener('input', () => {
   calcProducts();
   calcChlorine();
@@ -842,25 +1410,46 @@ $('reset').addEventListener('click', () => {
   calcProducts();
 });
 
+/* Atualização dos campos PPM */
+
 [
-  'alkPpm', 'alkMeta',
-  'saltPpm', 'saltMeta',
-  'hardPpm', 'hardMeta'
+  'alkPpm',
+  'alkMeta',
+  'alkDose',
+  'alkUnit',
+  'alkBaseVolume',
+  'alkIncrease',
+
+  'saltPpm',
+  'saltMeta',
+
+  'hardPpm',
+  'hardMeta',
+  'hardDose',
+  'hardUnit',
+  'hardBaseVolume',
+  'hardIncrease'
 ].forEach(id => {
   $(id).addEventListener('input', calcPpm);
+  $(id).addEventListener('change', calcPpm);
 });
+
+/* Atualização dos alertas e do histórico */
 
 $('cloroLivre').addEventListener('input', updateAlert);
 $('ph').addEventListener('input', updateAlert);
+
 $('saveReading').addEventListener('click', saveReading);
 $('clearReadings').addEventListener('click', clearReadings);
 
-/* Inicialização. */
+/* Inicialização */
+
 renderProducts();
 calcChlorine();
 calcPpm();
 updateAlert();
 renderReadings();
+
 </script>
 </body>
 </html>

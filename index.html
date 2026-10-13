@@ -1,33 +1,866 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#087f8c"><title>Piscina Pro — Calculadora</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#087f8c">
+<title>Piscina Pro — Calculadora para Piscineiros</title>
 <style>
-:root{color-scheme:light dark;--bg:light-dark(#f3f8fa,#101a22);--surface:light-dark(#fff,#192731);--surface2:light-dark(#eaf4f6,#22343e);--text:light-dark(#17313c,#edf7fa);--muted:light-dark(#627984,#a5bbc4);--border:light-dark(#d9e7eb,#344a55);--teal:light-dark(#087f8c,#55d0d0);--teal2:light-dark(#d9f3f2,#163f45);--amber:light-dark(#9a5a00,#ffce78);--warn:light-dark(#fff4dc,#46351a)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}.app{min-height:100vh;background:var(--bg)}header{background:linear-gradient(125deg,#075b78,#0a9a9c);color:white;padding:26px 20px 28px;border-radius:0 0 26px 26px}header .eyebrow{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;opacity:.8}h1{font-size:28px;line-height:1.12;margin:8px 0}header p{margin:8px 0 0;max-width:550px;color:#d7f3f5;font-size:14px}.wrap{max-width:780px;margin:auto;padding:18px 15px 42px}.volume-card,.panel,.notice{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:17px;margin-bottom:14px;box-shadow:0 3px 12px #001e2a0a}.section-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}.ico{width:43px;height:43px;border-radius:13px;background:var(--teal2);display:grid;place-items:center;font-size:22px;flex-shrink:0}.section-head h2{font-size:18px;margin:0}.sub{color:var(--muted);font-size:12px;margin-top:2px}.field-label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.input-row{display:flex;align-items:center;gap:10px}.input-row input{flex:1;min-width:0}.unit{color:var(--muted);font-size:13px;white-space:nowrap}input,select{font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:12px;width:100%;outline:none}input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #087f8c22}.tabs{display:flex;gap:8px;margin:18px 0 13px}.tab{flex:1;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--muted);padding:11px 7px;font-weight:750;cursor:pointer}.tab.active{background:var(--teal2);border-color:var(--teal);color:var(--text)}.product{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,.7fr);gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--border)}.product:first-of-type{border-top:0}.product strong{display:block;font-size:14px}.product small{display:block;color:var(--muted);font-size:12px;margin-top:2px}.dose-input{display:flex;align-items:center;gap:6px}.dose-input input{padding:10px}.dose-input span{font-size:11px;color:var(--muted);white-space:nowrap}.result{background:var(--teal2);border-radius:11px;padding:10px 12px;margin-top:7px;font-size:13px}.result b{font-size:16px;color:var(--teal)}.result .muted{font-size:11px;color:var(--muted)}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;border-radius:11px;background:#087f8c;color:#fff;font:700 14px system-ui;padding:12px 15px;cursor:pointer;width:100%;margin-top:10px}.btn.secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.notice{background:var(--warn);border-color:transparent;box-shadow:none;font-size:13px}.notice strong{display:block;margin-bottom:4px}.notice ul{padding-left:18px;margin:7px 0}.hidden{display:none!important}.foot{font-size:11px;color:var(--muted);text-align:center;padding:10px 5px}.tag{display:inline-block;background:var(--surface2);border-radius:6px;padding:3px 7px;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:9px}@media(max-width:480px){header{padding:23px 17px 25px}h1{font-size:25px}.wrap{padding:14px 11px 30px}.volume-card,.panel,.notice{padding:14px}.product{grid-template-columns:minmax(0,1fr) minmax(112px,.75fr);gap:8px}.two{grid-template-columns:1fr}}
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#f3f8fa,#101a22);
+  --surface: light-dark(#fff,#192731);
+  --surface2: light-dark(#eaf4f6,#22343e);
+  --text: light-dark(#17313c,#edf7fa);
+  --muted: light-dark(#627984,#a5bbc4);
+  --border: light-dark(#d9e7eb,#344a55);
+  --teal: light-dark(#087f8c,#55d0d0);
+  --teal2: light-dark(#d9f3f2,#163f45);
+  --warn: light-dark(#fff4dc,#46351a);
+  --danger: light-dark(#ffebeb,#48282b);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;
+}
+button,input,select { font: inherit; }
+button { cursor: pointer; }
+header {
+  background: linear-gradient(125deg,#075b78,#0a9a9c);
+  color: white;
+  padding: 26px 20px 28px;
+  border-radius: 0 0 26px 26px;
+}
+header .eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+h1 { font-size: 28px; line-height: 1.12; margin: 8px 0; }
+header p { margin: 8px 0 0; max-width: 550px; color: #d7f3f5; font-size: 14px; }
+.wrap { max-width: 780px; margin: auto; padding: 18px 15px 42px; }
+.volume-card,.panel,.notice {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 17px;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 12px #001e2a0a;
+}
+.section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.ico {
+  width: 43px; height: 43px; border-radius: 13px;
+  background: var(--teal2); display: grid; place-items: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.section-head h2 { font-size: 18px; margin: 0; }
+.sub { color: var(--muted); font-size: 12px; margin-top: 3px; }
+.field-label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.input-row { display: flex; align-items: center; gap: 10px; }
+.input-row input { flex: 1; min-width: 0; }
+.unit { color: var(--muted); font-size: 13px; white-space: nowrap; }
+input,select {
+  color: var(--text); background: var(--bg);
+  border: 1px solid var(--border); border-radius: 11px;
+  padding: 12px; width: 100%; outline: none;
+}
+input:focus,select:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px #087f8c22;
+}
+.tabs { display: flex; gap: 8px; margin: 18px 0 13px; }
+.tab {
+  flex: 1; border: 1px solid var(--border); border-radius: 12px;
+  background: var(--surface); color: var(--muted);
+  padding: 11px 7px; font-size: 13px; font-weight: 750;
+}
+.tab.active { background: var(--teal2); border-color: var(--teal); color: var(--text); }
+.product {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(125px,.7fr);
+  gap: 12px; align-items: start; padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+.product strong { display: block; font-size: 14px; }
+.product small { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+.dose-input { display: flex; align-items: center; gap: 6px; }
+.dose-input input { padding: 10px; min-width: 0; }
+.dose-input span { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.result {
+  background: var(--teal2); border-radius: 11px;
+  padding: 10px 12px; margin-top: 8px; font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.result b { font-size: 16px; color: var(--teal); }
+.result .muted { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.btn {
+  border: 0; border-radius: 11px; background: #087f8c; color: #fff;
+  font-weight: 700; padding: 12px 15px;
+  width: 100%; margin-top: 10px;
+}
+.btn.secondary {
+  background: var(--surface2); color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn.danger { background: #a72d35; color: white; }
+.notice { background: var(--warn); border-color: transparent; box-shadow: none; font-size: 13px; }
+.notice strong { display: block; margin-bottom: 4px; }
+.notice ul { padding-left: 18px; margin: 7px 0; }
+.notice p { margin: 5px 0; }
+.hidden { display: none !important; }
+.foot { font-size: 11px; color: var(--muted); text-align: center; padding: 10px 5px; }
+.tag {
+  display: inline-block; background: var(--surface2); border-radius: 6px;
+  padding: 3px 7px; font-size: 10px; font-weight: 800;
+  color: var(--muted); text-transform: uppercase;
+  letter-spacing: .05em; margin-bottom: 9px;
+}
+#ppm .product { grid-template-columns: 1fr; }
+#ppm .product .result { margin-top: 10px; }
+.reading {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.reading:last-child { border-bottom: 0; }
+@media(max-width:480px) {
+  header { padding: 23px 17px 25px; }
+  h1 { font-size: 25px; }
+  .wrap { padding: 14px 11px 30px; }
+  .volume-card,.panel,.notice { padding: 14px; }
+  .product { grid-template-columns: minmax(0,1fr) minmax(112px,.75fr); gap: 8px; }
+  .two { grid-template-columns: 1fr; }
+  .tabs { flex-wrap: wrap; }
+  .tab { flex: 1 1 42%; }
+}
 </style>
 </head>
-<body><div class="app"><header><div class="eyebrow">Ferramenta para piscineiros</div><h1> Piscina Pro <span style="font-size:22px">〰</span></h1><p>Calculadora de dosagem, controle de tratamento e acompanhamento da água.</p></header>
+<body>
+<header>
+  <div class="eyebrow">Ferramenta para piscineiros</div>
+  <h1>Piscina Pro <span style="font-size:22px">〰</span></h1>
+  <p>Calculadora de dosagem, controle de tratamento e acompanhamento da água.</p>
+</header>
+
 <main class="wrap">
-<div class="volume-card"><div class="section-head"><div class="ico">💧</div><div><h2>Volume da piscina</h2><div class="sub">Informe o volume em mil litros. O cálculo atualiza automaticamente.</div></div></div><label class="field-label" for="volume">Volume de água</label><div class="input-row"><input id="volume" type="number" min="0.1" step="0.1" value="20" inputmode="decimal"><span class="unit">mil litros (m³)</span></div><div class="sub" style="margin-top:7px">Exemplo: 20 = 20.000 litros. Se não souber o volume, meça comprimento × largura × profundidade média (m) × 1.000.</div></div>
-<div class="tabs"><button class="tab active" data-tab="tratamento">🧪 Tratamento</button><button class="tab" data-tab="cloro">🛡️ Cloro</button><button class="tab" data-tab="agua">📋 Controle da água</button></div>
-<section id="tratamento" class="panel"><div class="section-head"><div class="ico">🧪</div><div><h2>Produtos de tratamento</h2><div class="sub">Insira a dose indicada no rótulo de cada produto.</div></div></div><div class="notice" style="margin:0 0 12px"><strong>Por que a dose é configurável?</strong> Não existe uma dose universal segura para todas as marcas e formulações. Digite a dose do fabricante por 1.000 litros; o app calcula a quantidade total.</div><div id="products"></div><button id="reset" class="btn secondary">Limpar doses configuradas</button></section>
-<section id="cloro" class="panel hidden"><div class="section-head"><div class="ico">🛡️</div><div><h2>Calculadora de cloro</h2><div class="sub">Calcule a dose a partir do rótulo e registre o tipo de cloro.</div></div></div><div class="notice"><strong>Importante</strong> Não escolha a dose apenas pelo volume: meça o cloro livre e o pH. Siga o rótulo, incluindo limites, diluição e tempo para liberar a piscina.</div><label class="field-label" for="tipoCloro">Tipo de produto</label><select id="tipoCloro"><option value="liquido">Cloro líquido (hipoclorito de sódio)</option><option value="granulado">Cloro granulado — conferir composição</option><option value="pastilha">Pastilha — conferir composição</option></select><div class="two" style="margin-top:12px"><div><label class="field-label" for="doseCloro">Dose do rótulo por 1.000 L</label><input id="doseCloro" type="number" min="0" step="any" placeholder="Ex.: 5"><div class="sub">Informe o valor da embalagem</div></div><div><label class="field-label" for="unidadeCloro">Unidade da dose</label><select id="unidadeCloro"><option value="ml">mL</option><option value="g">gramas (g)</option><option value="pastilha">pastilhas</option></select></div></div><div class="result" id="cloroResult">Informe a dose do rótulo para calcular a quantidade total.</div><div class="two" style="margin-top:14px"><div><label class="field-label" for="cloroLivre">Cloro livre medido (ppm)</label><input id="cloroLivre" type="number" min="0" step="0.1" placeholder="Ex.: 2"></div><div><label class="field-label" for="ph">pH medido</label><input id="ph" type="number" min="0" max="14" step="0.1" placeholder="Ex.: 7,4"></div></div><div id="waterAlert" class="result">Registre as medições para receber um lembrete operacional.</div><button id="saveReading" class="btn">Registrar medição neste aparelho</button><div id="savedReadings" class="sub" style="margin-top:10px"></div></section>
-<section id="agua" class="panel hidden"><div class="section-head"><div class="ico">📋</div><div><h2>Controle e saturação</h2><div class="sub">O que acompanhar para evitar acumulação e perda de eficiência.</div></div></div><div class="product"><div><strong>Cloro livre e pH</strong><small>Medir com kit confiável antes de ajustar a dosagem.</small></div><span class="unit">Rotina de controle</span></div><div class="product"><div><strong>Ácido cianúrico (estabilizante)</strong><small>Pode aumentar com tricloro em pastilhas e dicloro granulado. Não é removido simplesmente alternando os cloros.</small></div><span class="unit">Medir periodicamente</span></div><div class="product"><div><strong>Alcalinidade total</strong><small>Ajuda a estabilizar o pH; corrigir com base em teste e rótulo.</small></div><span class="unit">Medir e registrar</span></div><div class="product"><div><strong>Dureza cálcica e metais</strong><small>Importantes para avaliar incrustações, corrosão e risco de manchas.</small></div><span class="unit">Conforme água e uso</span></div><div class="notice"><strong>Quando considerar reposição parcial de água?</strong> Se o ácido cianúrico ou outros sólidos dissolvidos estiverem elevados, confirme a medição e siga orientação técnica/local. A troca parcial pode reduzir a concentração; não é correto afirmar que toda piscina ficará “saturada” ou que sempre será necessário drenar.</div><div class="notice"><strong>Alternar cloros: explicação correta</strong><ul><li>Tricloro em pastilhas e dicloro granulado adicionam estabilizante (ácido cianúrico).</li><li>Hipoclorito de sódio líquido normalmente não adiciona ácido cianúrico; hipoclorito de cálcio também não, mas adiciona cálcio.</li><li>Alternar pode ajudar a controlar o acúmulo de certos componentes, mas não substitui testes, nem é uma regra fixa de calendário.</li><li>Não misture produtos concentrados entre si. Aplique separadamente conforme os rótulos e nunca combine cloros diferentes no mesmo recipiente.</li></ul></div><div class="sub">Referência geral: CDC Healthy Swimming — pH, cloro e produtos estabilizados. As exigências locais e os rótulos do fabricante prevalecem.</div></section>
-<div class="foot">Calculadora auxiliar. Não substitui teste da água, rótulo do fabricante nem treinamento para manuseio de produtos químicos.</div>
-</main></div>
+  <div class="volume-card">
+    <div class="section-head">
+      <div class="ico">💧</div>
+      <div>
+        <h2>Volume da piscina</h2>
+        <div class="sub">Informe o volume em mil litros. Os cálculos são atualizados automaticamente.</div>
+      </div>
+    </div>
+    <label class="field-label" for="volume">Volume de água</label>
+    <div class="input-row">
+      <input id="volume" type="number" min="0.1" step="any" value="20" inputmode="decimal">
+      <span class="unit">mil litros (m³)</span>
+    </div>
+    <div class="sub" style="margin-top:7px">
+      Exemplo: 20 = 20.000 litros. Para uma piscina retangular:
+      comprimento × largura × profundidade média × 1.000.
+      Para formatos irregulares, o resultado é uma estimativa.
+    </div>
+    <div id="volumeAlert" class="sub" role="status"></div>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Ferramentas">
+    <button class="tab active" data-tab="tratamento" role="tab" aria-selected="true">🧪 Tratamento</button>
+    <button class="tab" data-tab="cloro" role="tab" aria-selected="false">🛡️ Cloro</button>
+    <button class="tab" data-tab="agua" role="tab" aria-selected="false">📋 Controle da água</button>
+    <button class="tab" data-tab="ppm" role="tab" aria-selected="false">📏 PPM</button>
+  </div>
+
+  <section id="tratamento" class="panel">
+    <div class="section-head">
+      <div class="ico">🧪</div>
+      <div>
+        <h2>Produtos de tratamento</h2>
+        <div class="sub">Informe a dose indicada no rótulo para cada produto.</div>
+      </div>
+    </div>
+    <div class="notice">
+      <strong>Como interpretar o resultado</strong>
+      A calculadora multiplica a dose do rótulo pelo volume em milhares de litros.
+      Ela não determina sozinha se o produto é necessário nem se é compatível com
+      o tratamento atual. Confirme a composição, a finalidade e as instruções da embalagem.
+    </div>
+    <div id="products"></div>
+    <button id="reset" class="btn secondary">Limpar doses configuradas</button>
+  </section>
+
+  <section id="cloro" class="panel hidden">
+    <div class="section-head">
+      <div class="ico">🛡️</div>
+      <div>
+        <h2>Calculadora de cloro</h2>
+        <div class="sub">Calcule a quantidade indicada no rótulo e registre as medições.</div>
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>Atenção: quantidade não é concentração</strong>
+      O cálculo abaixo estima a quantidade de produto conforme a dose da embalagem.
+      Não prevê diretamente o aumento do cloro livre em ppm, pois isso depende da
+      composição e concentração do produto, da água e da demanda de cloro.
+      Meça a água e siga o rótulo.
+    </div>
+
+    <label class="field-label" for="tipoCloro">Tipo de produto</label>
+    <select id="tipoCloro">
+      <option value="liquido">Cloro líquido — conferir composição e concentração</option>
+      <option value="granulado">Cloro granulado — conferir composição</option>
+      <option value="pastilha">Pastilha — conferir composição</option>
+    </select>
+
+    <div class="two" style="margin-top:12px">
+      <div>
+        <label class="field-label" for="doseCloro">Dose do rótulo por 1.000 L</label>
+        <input id="doseCloro" type="number" min="0" step="any" placeholder="Ex.: 5">
+        <div class="sub">Copie o valor da embalagem.</div>
+      </div>
+      <div>
+        <label class="field-label" for="unidadeCloro">Unidade da dose</label>
+        <select id="unidadeCloro">
+          <option value="ml">mL</option>
+          <option value="g">Gramas (g)</option>
+          <option value="pastilha">Pastilhas</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="result" id="cloroResult" role="status">
+      Informe a dose do rótulo para calcular a quantidade total.
+    </div>
+
+    <div class="two" style="margin-top:14px">
+      <div>
+        <label class="field-label" for="cloroLivre">Cloro livre medido (ppm)</label>
+        <input id="cloroLivre" type="number" min="0" step="any" placeholder="Ex.: 2">
+      </div>
+      <div>
+        <label class="field-label" for="ph">pH medido</label>
+        <input id="ph" type="number" min="0" max="14" step="any" placeholder="Ex.: 7.4">
+      </div>
+    </div>
+
+    <div class="sub" style="margin-top:7px">
+      Referência geral de pH: 7,0–7,8. A meta e o cloro mínimo dependem do
+      tratamento, da presença de estabilizante, do uso da piscina e das regras aplicáveis.
+    </div>
+
+    <div class="result" id="waterAlert" role="status" aria-live="polite">
+      Registre as medições para receber um lembrete operacional.
+    </div>
+
+    <button id="saveReading" class="btn">Salvar medição neste aparelho</button>
+    <div id="savedReadings" aria-live="polite" style="margin-top:12px"></div>
+    <button id="clearReadings" class="btn secondary">Apagar histórico salvo</button>
+  </section>
+
+  <section id="agua" class="panel hidden">
+    <div class="section-head">
+      <div class="ico">📋</div>
+      <div>
+        <h2>Controle da água</h2>
+        <div class="sub">O que medir e por que acompanhar cada parâmetro.</div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div>
+        <strong>Cloro livre e pH</strong>
+        <small>São parâmetros fundamentais para a desinfecção. Teste com um kit adequado e ajuste conforme as orientações aplicáveis.</small>
+      </div>
+    </div>
+    <div class="product">
+      <div>
+        <strong>Ácido cianúrico (estabilizante)</strong>
+        <small>Pode se acumular com o uso de cloros estabilizados, como tricloro e dicloro. A concentração elevada pode afetar a ação desinfetante. Meça quando aplicável.</small>
+      </div>
+    </div>
+    <div class="product">
+      <div>
+        <strong>Alcalinidade total</strong>
+        <small>Ajuda a controlar a estabilidade do pH. Corrija com base em uma medição e na dose específica do produto.</small>
+      </div>
+    </div>
+    <div class="product">
+      <div>
+        <strong>Dureza cálcica</strong>
+        <small>Ajuda a avaliar o risco de incrustações ou de água agressiva aos materiais. A faixa adequada depende da piscina e da água.</small>
+      </div>
+    </div>
+    <div class="product">
+      <div>
+        <strong>Metais e sólidos dissolvidos</strong>
+        <small>Podem contribuir para manchas, depósitos e outros problemas. Investigue quando houver sinais ou indicação técnica.</small>
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>Quando considerar reposição parcial de água?</strong>
+      Se o estabilizante ou outros parâmetros estiverem elevados, confirme a medição
+      e avalie a reposição parcial com orientação técnica. A troca de água pode reduzir
+      algumas concentrações, mas não é necessária em toda situação.
+    </div>
+
+    <div class="notice">
+      <strong>Cloros diferentes não devem ser misturados</strong>
+      <ul>
+        <li>Tricloro e dicloro normalmente adicionam estabilizante.</li>
+        <li>Hipoclorito de sódio não adiciona estabilizante; hipoclorito de cálcio adiciona cálcio.</li>
+        <li>Alternar produtos não substitui medições nem garante que o equilíbrio da água esteja correto.</li>
+        <li>Nunca misture produtos concentrados entre si ou no mesmo recipiente. Siga o rótulo e use proteção adequada.</li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      Referência geral: CDC Healthy Swimming — tratamento, medição e segurança química.
+      As normas locais, o rótulo e o manual do equipamento prevalecem.
+    </div>
+  </section>
+
+  <section id="ppm" class="panel hidden">
+    <div class="section-head">
+      <div class="ico">📏</div>
+      <div>
+        <h2>Calculadora de PPM</h2>
+        <div class="sub">Entenda a diferença entre a leitura atual e a meta desejada.</div>
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>O que significa PPM?</strong>
+      PPM significa partes por milhão. Em água, para concentrações diluídas,
+      1 ppm é aproximadamente igual a 1 mg/L. A diferença entre a leitura e a
+      meta mostra quanto o parâmetro precisa mudar, mas não é automaticamente
+      a dose em gramas de qualquer produto.
+    </div>
+
+    <div class="notice">
+      <strong>Antes de adicionar produtos</strong>
+      <ul>
+        <li>Confirme a leitura com um teste adequado e dentro da validade.</li>
+        <li>Use uma meta compatível com a piscina, o revestimento e o equipamento.</li>
+        <li>Consulte o rótulo do produto corretivo antes de calcular ou aplicar uma dose.</li>
+        <li>Se a leitura estiver acima da meta, não adicione um elevador para aquele parâmetro.</li>
+      </ul>
+    </div>
+
+    <div class="product">
+      <div>
+        <strong>Alcalinidade total</strong>
+        <small>Uma faixa frequentemente utilizada é 80–120 ppm, mas a meta depende do sistema e da orientação do fabricante. A alcalinidade influencia a estabilidade do pH.</small>
+      </div>
+      <div class="two">
+        <div>
+          <label class="field-label" for="alkPpm">Leitura atual (ppm)</label>
+          <input id="alkPpm" type="number" min="0" step="any" placeholder="Ex.: 60">
+        </div>
+        <div>
+          <label class="field-label" for="alkMeta">Meta desejada (ppm)</label>
+          <input id="alkMeta" type="number" min="0" step="any" value="100">
+        </div>
+      </div>
+      <div class="result" id="alkResult" role="status">Informe a leitura atual e a meta.</div>
+    </div>
+
+    <div class="product">
+      <div>
+        <strong>Sal — somente para gerador de cloro salino</strong>
+        <small>A meta varia conforme o modelo. Muitos equipamentos trabalham na faixa aproximada de 3.000–4.000 ppm, mas o manual do fabricante é quem determina a faixa correta.</small>
+      </div>
+      <div class="two">
+        <div>
+          <label class="field-label" for="saltPpm">Leitura atual (ppm)</label>
+          <input id="saltPpm" type="number" min="0" step="any" placeholder="Ex.: 2500">
+        </div>
+        <div>
+          <label class="field-label" for="saltMeta">Meta do fabricante (ppm)</label>
+          <input id="saltMeta" type="number" min="0" step="any" value="3500">
+        </div>
+      </div>
+      <div class="result" id="saltResult" role="status">Informe a leitura atual e a meta.</div>
+    </div>
+
+    <div class="product">
+      <div>
+        <strong>Dureza cálcica</strong>
+        <small>Uma faixa de referência comum é cerca de 200–400 ppm, mas o valor adequado depende do revestimento, da composição da água e do equipamento. Valores inadequados podem favorecer corrosão, depósitos ou incrustações.</small>
+      </div>
+      <div class="two">
+        <div>
+          <label class="field-label" for="hardPpm">Leitura atual (ppm)</label>
+          <input id="hardPpm" type="number" min="0" step="any" placeholder="Ex.: 150">
+        </div>
+        <div>
+          <label class="field-label" for="hardMeta">Meta desejada (ppm)</label>
+          <input id="hardMeta" type="number" min="0" step="any" value="250">
+        </div>
+      </div>
+      <div class="result" id="hardResult" role="status">Informe a leitura atual e a meta.</div>
+    </div>
+
+    <div class="notice">
+      <strong>Como interpretar os resultados</strong>
+      <p><b>Alcalinidade:</b> a diferença em ppm não informa sozinha quantos gramas de elevador adicionar. Consulte a dose por volume no rótulo.</p>
+      <p><b>Sal:</b> a estimativa considera o volume informado, a diferença entre as leituras e sal puro. Pureza, água já presente no sistema e outras condições podem alterar a quantidade real necessária.</p>
+      <p><b>Dureza:</b> a diferença em ppm não é uma dose direta. Use um produto indicado para corrigir a dureza e siga sua embalagem.</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    Ferramenta auxiliar. Não substitui testes confiáveis, rótulos, manuais,
+    treinamento ou normas locais. Não aplique produtos apenas com base em uma estimativa.
+  </div>
+</main>
+
 <script>
-const items=[
- {id:'sulfato',name:'Sulfato de alumínio',desc:'Decantação; pode reduzir pH e alcalinidade.',unit:'g',label:'Dose por 1.000 L (g)'},
- {id:'algicida',name:'Algicida',desc:'Confira se é manutenção ou choque e se é compatível com o tratamento.',unit:'mL',label:'Dose por 1.000 L (mL)'},
- {id:'cobre',name:'Sulfato de cobre',desc:'Cuidado: cobre pode manchar superfícies e acumular; não usar sem avaliar a água e a indicação do produto.',unit:'g',label:'Dose por 1.000 L (g)'},
- {id:'alcalinidade',name:'Elevador de alcalinidade',desc:'Ajustar conforme medição da alcalinidade total.',unit:'g',label:'Dose por 1.000 L (g)'},
- {id:'clarificante',name:'Clarificante (sem decantação pesada)',desc:'A dose e o modo de filtração variam por formulação; não presuma que não altera o pH sem consultar o rótulo.',unit:'mL',label:'Dose por 1.000 L (mL)'}
+'use strict';
+
+const items = [
+  {
+    id: 'sulfato',
+    name: 'Sulfato de alumínio',
+    desc: 'Usado em determinados processos de clarificação/decantação. Pode alterar pH e alcalinidade; confira o rótulo e o procedimento de filtração.',
+    unit: 'g',
+    label: 'Dose por 1.000 L (g)'
+  },
+  {
+    id: 'algicida',
+    name: 'Algicida',
+    desc: 'Confira se é para manutenção ou tratamento de choque e se é compatível com os demais produtos.',
+    unit: 'mL',
+    label: 'Dose por 1.000 L (mL)'
+  },
+  {
+    id: 'cobre',
+    name: 'Sulfato de cobre',
+    desc: 'Pode causar manchas e acumular cobre na água. Não use sem verificar a indicação técnica, a formulação e a compatibilidade com a piscina.',
+    unit: 'g',
+    label: 'Dose por 1.000 L (g)'
+  },
+  {
+    id: 'alcalinidade',
+    name: 'Elevador de alcalinidade',
+    desc: 'Utilize após medir a alcalinidade total. A quantidade necessária depende da formulação e da instrução do fabricante.',
+    unit: 'g',
+    label: 'Dose por 1.000 L (g)'
+  },
+  {
+    id: 'clarificante',
+    name: 'Clarificante',
+    desc: 'A dose, o modo de aplicação e a necessidade de filtração variam por produto. Consulte o rótulo.',
+    unit: 'mL',
+    label: 'Dose por 1.000 L (mL)'
+  }
 ];
-const $=id=>document.getElementById(id);const fmt=n=>new Intl.NumberFormat('pt-BR',{maximumFractionDigits:2}).format(n);function vol(){return Math.max(0,Number($('volume').value)||0)}
-function renderProducts(){ $('products').innerHTML=items.map(p=>`<div class="product"><div><strong>${p.name}</strong><small>${p.desc}</small><div class="result" id="out-${p.id}">Informe a dose do rótulo.</div></div><div><label class="field-label" for="dose-${p.id}">${p.label}</label><div class="dose-input"><input id="dose-${p.id}" type="number" min="0" step="any" placeholder="Dose" data-product="${p.id}"><span>${p.unit}/1.000 L</span></div></div></div>`).join('');items.forEach(p=>$('dose-'+p.id).addEventListener('input',calcProducts));calcProducts()}
-function calcProducts(){const v=vol();items.forEach(p=>{const d=Number($('dose-'+p.id)?.value);const out=$('out-'+p.id);if(!v){out.innerHTML='Informe um volume válido.'}else if($('dose-'+p.id).value===''||!Number.isFinite(d)){out.innerHTML='Informe a dose do rótulo.'}else{out.innerHTML=`<b>${fmt(d*v)} ${p.unit}</b><div class="muted">Quantidade calculada para ${fmt(v*1000)} litros</div>`}})}
-$('volume').addEventListener('input',()=>{calcProducts();calcChlorine()});function calcChlorine(){const d=$('doseCloro').value;const u=$('unidadeCloro').value;const v=vol();if(d===''||!v){$('cloroResult').textContent='Informe o volume e a dose do rótulo para calcular.';return}const n=Number(d)*v;const unit=u==='ml'?'mL':u==='g'?'g':'pastilhas';$('cloroResult').innerHTML=`Quantidade calculada: <b>${fmt(n)} ${unit}</b><div class="muted">Base: ${fmt(d)} ${unit} por 1.000 L. Confirme a unidade e a instrução da embalagem.</div>`}
-$('doseCloro').addEventListener('input',calcChlorine);$('unidadeCloro').addEventListener('change',calcChlorine);$('tipoCloro').addEventListener('change',()=>{const t=$('tipoCloro').value;if(t==='pastilha')$('unidadeCloro').value='pastilha';else if($('unidadeCloro').value==='pastilha')$('unidadeCloro').value=t==='liquido'?'ml':'g';calcChlorine()});$('reset').addEventListener('click',()=>{items.forEach(p=>$('dose-'+p.id).value='');calcProducts()});document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));['tratamento','cloro','agua'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab))}));
-function updateAlert(){const c=$('cloroLivre').value,p=$('ph').value;let s='Registre as medições para receber um lembrete operacional.';if(c!==''||p!==''){const notes=[];if(p!==''&&(Number(p)<7||Number(p)>7.8))notes.push('pH fora da faixa geral de referência 7,0–7,8: confirme o teste e corrija conforme orientação do produto e norma local.');if(c!==''&&Number(c)<1)notes.push('Cloro livre abaixo de 1 ppm: confira imediatamente o teste e as exigências aplicáveis à piscina.');if(c!==''&&Number(c)>5)notes.push('Cloro livre elevado: não libere a piscina sem verificar o limite do produto e a orientação local.');s=notes.length?notes.join(' '):'Medições registradas. Compare com a faixa indicada pelo fabricante e pelas regras locais.'}$('waterAlert').textContent=s}
-$('cloroLivre').addEventListener('input',updateAlert);$('ph').addEventListener('input',updateAlert);$('saveReading').addEventListener('click',()=>{const c=$('cloroLivre').value,p=$('ph').value;if(c===''&&p===''){$('savedReadings').textContent='Informe ao menos uma medição antes de registrar.';return}const entry=`${new Date().toLocaleString('pt-BR')} — Cloro livre: ${c===''?'—':c+' ppm'}; pH: ${p===''?'—':p}`;let prev=$('savedReadings').textContent;$('savedReadings').textContent=entry+(prev&&prev.startsWith('Último registro:')?'\n'+prev:'');$('savedReadings').style.whiteSpace='pre-line';updateAlert()});renderProducts();calcChlorine();
-</script></body></html>
+
+const $ = id => document.getElementById(id);
+
+const fmt = n => new Intl.NumberFormat('pt-BR', {
+  maximumFractionDigits: 2
+}).format(n);
+
+function readNumber(id) {
+  const raw = $(id).value.trim();
+
+  if (raw === '') return null;
+
+  const n = Number(raw);
+
+  if (!Number.isFinite(n)) return null;
+
+  return n;
+}
+
+function vol() {
+  const v = readNumber('volume');
+
+  if (v === null || v <= 0) return null;
+
+  return v;
+}
+
+function setResult(id, html) {
+  $(id).innerHTML = html;
+}
+
+function renderProducts() {
+  $('products').innerHTML = items.map(p => `
+    <div class="product">
+      <div>
+        <strong>${p.name}</strong>
+        <small>${p.desc}</small>
+        <div class="result" id="out-${p.id}">Informe a dose do rótulo.</div>
+      </div>
+      <div>
+        <label class="field-label" for="dose-${p.id}">${p.label}</label>
+        <div class="dose-input">
+          <input id="dose-${p.id}" type="number" min="0" step="any"
+            placeholder="Dose" inputmode="decimal">
+          <span>${p.unit}/1.000 L</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  items.forEach(p => {
+    $('dose-' + p.id).addEventListener('input', calcProducts);
+  });
+
+  calcProducts();
+}
+
+function calcProducts() {
+  const v = vol();
+
+  $('volumeAlert').textContent = v === null
+    ? 'Informe um volume maior que zero para realizar os cálculos.'
+    : '';
+
+  items.forEach(p => {
+    const input = $('dose-' + p.id);
+    const raw = input.value.trim();
+    const d = readNumber('dose-' + p.id);
+    const out = $('out-' + p.id);
+
+    if (v === null) {
+      out.textContent = 'Informe um volume válido maior que zero.';
+    } else if (raw === '' || d === null) {
+      out.textContent = 'Informe a dose indicada no rótulo.';
+    } else if (d < 0) {
+      out.textContent = 'A dose não pode ser negativa.';
+    } else {
+      out.innerHTML = `
+        <b>${fmt(d * v)} ${p.unit}</b>
+        <div class="muted">Quantidade calculada para ${fmt(v * 1000)} litros. Confirme a aplicação no rótulo.</div>
+      `;
+    }
+  });
+}
+
+function calcChlorine() {
+  const d = readNumber('doseCloro');
+  const v = vol();
+  const raw = $('doseCloro').value.trim();
+  const u = $('unidadeCloro').value;
+
+  if (v === null || raw === '' || d === null || d < 0) {
+    $('cloroResult').textContent =
+      'Informe um volume válido e uma dose não negativa do rótulo.';
+    return;
+  }
+
+  const unit = u === 'ml' ? 'mL' : u === 'g' ? 'g' : 'pastilhas';
+
+  $('cloroResult').innerHTML = `
+    Quantidade calculada: <b>${fmt(d * v)} ${unit}</b>
+    <div class="muted">
+      Base: ${fmt(d)} ${unit} por 1.000 L. Esse cálculo não prevê o aumento
+      do cloro livre em ppm. Confirme a composição, a unidade e as instruções da embalagem.
+    </div>
+  `;
+}
+
+function updateAlert() {
+  const c = readNumber('cloroLivre');
+  const p = readNumber('ph');
+  const cRaw = $('cloroLivre').value.trim();
+  const pRaw = $('ph').value.trim();
+  const notes = [];
+
+  if (cRaw === '' && pRaw === '') {
+    $('waterAlert').textContent =
+      'Registre as medições para receber um lembrete operacional.';
+    return;
+  }
+
+  if (cRaw !== '' && (c === null || c < 0)) {
+    notes.push('A leitura de cloro livre deve ser um número não negativo.');
+  }
+
+  if (pRaw !== '' && (p === null || p < 0 || p > 14)) {
+    notes.push('Informe um pH válido entre 0 e 14.');
+  }
+
+  if (p !== null && pRaw !== '' && p >= 0 && p <= 14) {
+    if (p < 7) {
+      notes.push('pH abaixo da faixa geral de referência 7,0–7,8. Confirme o teste e avalie a correção adequada.');
+    } else if (p > 7.8) {
+      notes.push('pH acima da faixa geral de referência 7,0–7,8. Confirme o teste e avalie a correção adequada.');
+    } else {
+      notes.push('pH dentro da faixa geral de referência do CDC. Confira também a meta específica do seu sistema.');
+    }
+  }
+
+  if (c !== null && cRaw !== '' && c >= 0) {
+    if (c < 1) {
+      notes.push('Cloro livre abaixo de 1 ppm. Confirme a medição e verifique a exigência aplicável ao tratamento. Com estabilizante, o mínimo recomendado pelo CDC para piscinas é diferente.');
+    } else if (c > 5) {
+      notes.push('Cloro livre elevado em relação a muitas faixas operacionais comuns. Não libere a piscina sem confirmar o limite aplicável e a orientação do produto.');
+    } else {
+      notes.push('Compare o cloro medido com a faixa indicada para o produto, o estabilizante e a piscina.');
+    }
+  }
+
+  $('waterAlert').textContent = notes.join(' ');
+}
+
+function ppmResult(currentId, targetId, resultId, kind) {
+  const c = readNumber(currentId);
+  const t = readNumber(targetId);
+  const cRaw = $(currentId).value.trim();
+  const tRaw = $(targetId).value.trim();
+  const out = $(resultId);
+
+  if (cRaw === '' || tRaw === '' || c === null || t === null) {
+    out.textContent = 'Informe a leitura atual e a meta.';
+    return;
+  }
+
+  if (c < 0 || t < 0) {
+    out.textContent = 'Os valores não podem ser negativos.';
+    return;
+  }
+
+  const gap = t - c;
+
+  if (Math.abs(gap) < 0.0000001) {
+    out.innerHTML = `
+      <b>Leitura igual à meta informada.</b>
+      <div class="muted">Confirme a leitura e verifique se essa meta é adequada para sua piscina.</div>
+    `;
+    return;
+  }
+
+  if (gap < 0) {
+    out.innerHTML = `
+      <b>${fmt(Math.abs(gap))} ppm acima da meta</b>
+      <div class="muted">
+        Não adicione um elevador para aumentar esse parâmetro.
+        Confirme a medição e consulte a orientação técnica para reduzi-lo.
+      </div>
+    `;
+    return;
+  }
+
+  if (kind === 'salt') {
+    const v = vol();
+
+    if (v === null) {
+      out.innerHTML = `
+        <b>Faltam ${fmt(gap)} ppm</b>
+        <div class="muted">Informe um volume válido para estimar a massa de sal.</div>
+      `;
+      return;
+    }
+
+    // Volume em milhares de litros.
+    // gap (mg/L) × volume (milhares de litros) / 1.000
+    // = kg teóricos de sal puro.
+    const kg = gap * v / 1000;
+
+    out.innerHTML = `
+      <b>Faltam ${fmt(gap)} ppm</b>
+      <div class="muted">
+        Estimativa teórica: <b>${fmt(kg)} kg de sal puro</b>
+        para ${fmt(v * 1000)} litros.
+        Use somente em piscina com gerador de cloro salino.
+        Confirme a meta no manual, a leitura atual e a pureza do sal.
+        A estimativa não considera perdas ou outras incertezas de medição.
+        Adicione conforme o manual e reteste antes de ajustar novamente.
+      </div>
+    `;
+  } else if (kind === 'alk') {
+    out.innerHTML = `
+      <b>Faltam ${fmt(gap)} ppm</b>
+      <div class="muted">
+        Essa é a diferença de alcalinidade, não uma dose em gramas.
+        Consulte no rótulo do elevador de alcalinidade a quantidade por volume
+        e siga o procedimento de aplicação. Depois, meça novamente.
+      </div>
+    `;
+  } else {
+    out.innerHTML = `
+      <b>Faltam ${fmt(gap)} ppm</b>
+      <div class="muted">
+        Essa é a diferença de dureza cálcica, não uma dose direta.
+        Use somente produto indicado para corrigir a dureza e siga a dose
+        do fabricante. Depois, meça novamente.
+      </div>
+    `;
+  }
+}
+
+function calcPpm() {
+  ppmResult('alkPpm', 'alkMeta', 'alkResult', 'alk');
+  ppmResult('saltPpm', 'saltMeta', 'saltResult', 'salt');
+  ppmResult('hardPpm', 'hardMeta', 'hardResult', 'hard');
+}
+
+function saveReading() {
+  const cRaw = $('cloroLivre').value.trim();
+  const pRaw = $('ph').value.trim();
+  const c = readNumber('cloroLivre');
+  const p = readNumber('ph');
+
+  if (cRaw === '' && pRaw === '') {
+    $('savedReadings').textContent = 'Informe ao menos uma medição antes de salvar.';
+    return;
+  }
+
+  if (
+    (cRaw !== '' && (c === null || c < 0)) ||
+    (pRaw !== '' && (p === null || p < 0 || p > 14))
+  ) {
+    $('savedReadings').textContent =
+      'Confira os valores: cloro não pode ser negativo e o pH deve estar entre 0 e 14.';
+    return;
+  }
+
+  const entry = {
+    date: new Date().toLocaleString('pt-BR'),
+    chlorine: cRaw === '' ? null : c,
+    ph: pRaw === '' ? null : p
+  };
+
+  try {
+    const previous = JSON.parse(localStorage.getItem('piscinaProReadings') || '[]');
+    const readings = Array.isArray(previous) ? previous : [];
+    readings.unshift(entry);
+
+    // Mantém no máximo 50 registros neste navegador.
+    localStorage.setItem('piscinaProReadings', JSON.stringify(readings.slice(0, 50)));
+    renderReadings();
+  } catch {
+    $('savedReadings').textContent =
+      'Não foi possível salvar no navegador. Verifique as configurações de armazenamento.';
+  }
+}
+
+function renderReadings() {
+  const container = $('savedReadings');
+
+  try {
+    const readings = JSON.parse(localStorage.getItem('piscinaProReadings') || '[]');
+
+    if (!Array.isArray(readings) || readings.length === 0) {
+      container.textContent = 'Nenhuma medição salva neste navegador.';
+      return;
+    }
+
+    container.innerHTML = '<strong>Histórico de medições</strong>' +
+      readings.map(r => {
+        const chlorine = r.chlorine === null ? '—' : fmt(r.chlorine) + ' ppm';
+        const ph = r.ph === null ? '—' : fmt(r.ph);
+
+        return `
+          <div class="reading">
+            <strong>${escapeHTML(r.date)}</strong><br>
+            Cloro livre: ${escapeHTML(chlorine)} · pH: ${escapeHTML(ph)}
+          </div>
+        `;
+      }).join('');
+  } catch {
+    container.textContent = 'Não foi possível ler o histórico salvo.';
+  }
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+}
+
+function clearReadings() {
+  if (!confirm('Deseja apagar todas as medições salvas neste navegador?')) return;
+
+  try {
+    localStorage.removeItem('piscinaProReadings');
+    renderReadings();
+  } catch {
+    $('savedReadings').textContent = 'Não foi possível apagar o histórico.';
+  }
+}
+
+/* Navegação entre as quatro abas. */
+document.querySelectorAll('.tab').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(tab => {
+      const active = tab === button;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+
+    ['tratamento', 'cloro', 'agua', 'ppm'].forEach(id => {
+      $(id).classList.toggle('hidden', id !== button.dataset.tab);
+    });
+  });
+});
+
+/* Atualização automática. */
+$('volume').addEventListener('input', () => {
+  calcProducts();
+  calcChlorine();
+  calcPpm();
+});
+
+$('doseCloro').addEventListener('input', calcChlorine);
+$('unidadeCloro').addEventListener('change', calcChlorine);
+
+$('tipoCloro').addEventListener('change', () => {
+  const type = $('tipoCloro').value;
+
+  if (type === 'pastilha') {
+    $('unidadeCloro').value = 'pastilha';
+  } else if ($('unidadeCloro').value === 'pastilha') {
+    $('unidadeCloro').value = type === 'liquido' ? 'ml' : 'g';
+  }
+
+  calcChlorine();
+});
+
+$('reset').addEventListener('click', () => {
+  items.forEach(p => {
+    $('dose-' + p.id).value = '';
+  });
+
+  calcProducts();
+});
+
+[
+  'alkPpm', 'alkMeta',
+  'saltPpm', 'saltMeta',
+  'hardPpm', 'hardMeta'
+].forEach(id => {
+  $(id).addEventListener('input', calcPpm);
+});
+
+$('cloroLivre').addEventListener('input', updateAlert);
+$('ph').addEventListener('input', updateAlert);
+$('saveReading').addEventListener('click', saveReading);
+$('clearReadings').addEventListener('click', clearReadings);
+
+/* Inicialização. */
+renderProducts();
+calcChlorine();
+calcPpm();
+updateAlert();
+renderReadings();
+</script>
+</body>
+</html>

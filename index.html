@@ -321,10 +321,10 @@ input:focus,select:focus {
   <section id="tratamento" class="panel">
 
     <div class="section-head">
-      <div class="ico">🧪</div>
+      <div class="ico">📊</div>
       <div>
-        <h2>Sulfato de alumínio</h2>
-        <div class="sub">Quantidade calculada de cada produto com base nos litros da piscina.</div>
+        <h2>Doses calculadas</h2>
+        <div class="sub">Quantidade exata de cada produto baseada no volume da piscina.</div>
       </div>
     </div>
 
@@ -408,14 +408,14 @@ input:focus,select:focus {
       <div class="ico">📋</div>
       <div>
         <h2>Controle da água</h2>
-        <div class="sub">Orientações essenciais e guias de medição de volume para piscineiros.</div>
+        <div class="sub">Orientações essenciais, parâmetros técnicos e guias de medição.</div>
       </div>
     </div>
 
     <div class="product" style="display:block">
       <div class="product-info">
         <strong>Cloro livre e pH</strong>
-        <small>São parâmetros fundamentais para a desinfecção. Teste com um kit adequado e ajuste conforme as orientações aplicáveis.</small>
+        <small>Parâmetros fundamentais para a desinfecção. O <b>cloro ideal é de 2,5 ppm</b> por mil litro e o pH deve manter-se na faixa de 7,0 a 7,8.</small>
       </div>
     </div>
 
@@ -443,22 +443,22 @@ input:focus,select:focus {
     <div class="product" style="display:block">
       <div class="product-info">
         <strong>Metais e sólidos dissolvidos</strong>
-        <small>Podem contribuir para manchas, depósitos e outros problemas. Investigue quando houver sinais ou indicação técnica.</small>
+        <small>Podem contribuir para manchas, depósitos e outros problemas na estrutura. Investigue quando houver sinais evidentes.</small>
       </div>
     </div>
 
-    <div class="notice">
-      <strong>Quando considerar reposição parcial de água?</strong>
-      <p>Se o estabilizante ou outros parâmetros estiverem elevados, confirme a medição e avalie a reposição parcial com orientação técnica. A troca de água pode reduzir algumas concentrações, mas não é necessária em toda situação.</p>
+    <!-- PROTOCOLO DE DESCONTAMINAÇÃO / CHOQUE -->
+    <div class="notice" style="background: light-dark(#e6f7ff,#112a38); border-color: light-dark(#b3e0ff,#1e4a63);">
+      <strong style="color: light-dark(#0056b3,#55d0d0);">🚨 Descontaminação Rápida (Choque Biológico)</strong>
+      <p>Em caso de contaminação da água por animais (como ratos, morcegos, aves ou dejetos), utilize <b>10g de cloro por mil litro</b> de água para realizar o choque de descontaminação imediata e garantir a segurança sanitária antes do próximo banho.</p>
     </div>
 
     <div class="notice">
-      <strong>Cloros diferentes não devem ser misturados</strong>
+      <strong>Cuidados importantes com os produtos</strong>
       <ul>
-        <li>Tricloro e dicloro normalmente adicionam estabilizante.</li>
-        <li>Hipoclorito de sódio não adiciona estabilizante; hipoclorito de cálcio adiciona cálcio.</li>
-        <li>Alternar produtos não substitui medições nem garante que o equilíbrio da água esteja correto.</li>
-        <li>Nunca misture produtos concentrados entre si ou no mesmo recipiente. Siga o rótulo e use proteção adequada.</li>
+        <li><b>Nunca misture produtos químicos concentrados entre si</b> no mesmo balde ou recipiente (risco de reações perigosas).</li>
+        <li>Tricloro e dicloro adicionam estabilizante; hipoclorito de sódio não adiciona estabilizante; hipoclorito de cálcio adiciona cálcio.</li>
+        <li>Sempre siga as instruções do fabricante no rótulo e utilize equipamentos de proteção adequados.</li>
       </ul>
     </div>
 
@@ -597,12 +597,12 @@ function calcPpm() {
   if (saltDrops === null) {
     $('saltResult').textContent = '—';
   } else {
-    const saltPpmCurrent = saltDrops * 0.125; // Converte gotas para g/L
+    const saltPpmCurrent = saltDrops * 0.125;
     if (saltPpmCurrent >= 3.5) {
       $('saltResult').textContent = 'OK (Sem necessidade)';
     } else {
       const saltGap = 3.5 - saltPpmCurrent;
-      const saltKg = saltGap * v; // gap em g/L multiplicado por mil litros (m³) dá exatamente os kg
+      const saltKg = saltGap * v;
       $('saltResult').textContent = `${fmt(saltKg)} kg`;
     }
   }
@@ -645,7 +645,7 @@ document.querySelectorAll('.tab').forEach(button => {
   });
 });
 
-/* Inicialização */
+/* Initialization */
 renderProducts();
 calcPpm();
 </script>

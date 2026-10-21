@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -60,6 +61,84 @@ header p {
   max-width: 780px;
   margin: auto;
   padding: 18px 15px 42px;
+}
+
+/* CARTÃO DE DOWNLOAD DO APLICATIVO */
+.app-download {
+  max-width: 780px;
+  margin: 18px auto 0;
+  padding: 0 15px;
+}
+
+.app-download-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 17px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 3px 12px #001e2a0a;
+}
+
+.app-download-copy {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.app-download-icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: var(--teal2);
+  border-radius: 14px;
+  font-size: 24px;
+}
+
+.app-download-copy strong {
+  display: block;
+  font-size: 15px;
+}
+
+.app-download-copy small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  min-height: 46px;
+  padding: 11px 17px;
+  border: 0;
+  border-radius: 12px;
+  background: #087f8c;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 750;
+  text-align: center;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+
+.app-download-button:hover {
+  background: #066b76;
+  transform: translateY(-1px);
+}
+
+.app-download-button:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
 }
 
 .volume-card,.panel {
@@ -165,9 +244,7 @@ input:focus,select:focus {
   border-top: 1px solid var(--border);
 }
 
-.product:first-of-type {
-  border-top: 0;
-}
+.product:first-of-type { border-top: 0; }
 
 .product-info strong { display: block; font-size: 15px; }
 
@@ -212,9 +289,7 @@ input:focus,select:focus {
   margin-bottom: 10px;
 }
 
-.ppm-inputs > div {
-  flex: 1;
-}
+.ppm-inputs > div { flex: 1; }
 
 .notice {
   background: var(--warn);
@@ -237,9 +312,7 @@ input:focus,select:focus {
   border-top: 1px solid var(--border);
 }
 
-.shape-card:first-of-type {
-  border-top: 0;
-}
+.shape-card:first-of-type { border-top: 0; }
 
 .shape-icon {
   font-size: 28px;
@@ -261,17 +334,41 @@ input:focus,select:focus {
   padding: 10px 5px;
 }
 
+@media(max-width:520px) {
+  .app-download {
+    padding: 0 11px;
+    margin-top: 14px;
+  }
+
+  .app-download-card {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .app-download-button { width: 100%; }
+}
+
 @media(max-width:480px) {
   header { padding: 23px 17px 25px; }
   h1 { font-size: 25px; }
   .wrap { padding: 14px 11px 30px; }
   .volume-card,.panel { padding: 14px; }
-  .product { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .product {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
   .result { width: 100%; text-align: left; }
   .ppm-inputs { flex-direction: column; gap: 8px; }
   .tabs { flex-wrap: wrap; }
   .tab { flex: 1 1 42%; }
-  .shape-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .shape-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 </style>
 </head>
@@ -283,6 +380,29 @@ input:focus,select:focus {
   <h1>Piscina Pro <span style="font-size:22px">〰</span></h1>
   <p>Calculadora de dosagem, controle de tratamento e acompanhamento da água.</p>
 </header>
+
+<!-- DOWNLOAD DO APLICATIVO ANDROID -->
+<section class="app-download" aria-label="Download do aplicativo">
+  <div class="app-download-card">
+    <div class="app-download-copy">
+      <div class="app-download-icon" aria-hidden="true">📲</div>
+      <div>
+        <strong>Leve o Piscina Pro com você</strong>
+        <small>Baixe o aplicativo para Android e tenha as ferramentas à mão.</small>
+      </div>
+    </div>
+
+    <a
+      class="app-download-button"
+      href="./PiscinaPro.apk"
+      download="PiscinaPro.apk"
+      type="application/vnd.android.package-archive"
+      aria-label="Baixar aplicativo Piscina Pro para Android"
+    >
+      ⬇ Baixar aplicativo
+    </a>
+  </div>
+</section>
 
 <main class="wrap">
 
@@ -317,7 +437,6 @@ input:focus,select:focus {
   </div>
 
   <!-- TRATAMENTO -->
-
   <section id="tratamento" class="panel">
 
     <div class="section-head">
@@ -333,7 +452,6 @@ input:focus,select:focus {
   </section>
 
   <!-- CALCULADORA PPM -->
-
   <section id="ppm" class="panel hidden">
 
     <div class="section-head">
@@ -362,7 +480,7 @@ input:focus,select:focus {
       </div>
     </div>
 
-    <!-- SAL (BASEADO EM GOTAS COM FATOR 0,125 e META DE 3,5 g/L) -->
+    <!-- SAL -->
     <div class="ppm-card">
       <div class="ppm-header">
         <strong>Sal (Reposição)</strong>
@@ -401,7 +519,6 @@ input:focus,select:focus {
   </section>
 
   <!-- CONTROLE DA ÁGUA -->
-
   <section id="agua" class="panel hidden">
 
     <div class="section-head">
@@ -421,7 +538,7 @@ input:focus,select:focus {
 
     <div class="product" style="display:block">
       <div class="product-info">
-        <strong>Ácido cianúrico (Estabilizante) & Revezamento de Cloros</strong>
+        <strong>Ácido cianúrico (Estabilizante) &amp; Revezamento de Cloros</strong>
         <small>Cloros estabilizados (tricloro/dicloro) acumulam ácido cianúrico na água, o que pode "travar" o cloro se exceder. <b>Dica prática:</b> intercale o uso entre cloro estabilizado e hipoclorito (não estabilizado) para evitar o acúmulo excessivo do residual.</small>
       </div>
     </div>
@@ -494,7 +611,7 @@ input:focus,select:focus {
         <div>
           <strong>Piscina Retangular ou Quadrada</strong>
           <small><b>Fórmula:</b> Comprimento × Largura × Profundidade Média</small>
-          <div class="sub" style="margin-top: 4px;">Messa o comprimento e a largura em metros. Para a profundidade, tire a média entre a parte mais rasa e a mais funda. Multiplique tudo por 1.000 para obter o total em litros.</div>
+          <div class="sub" style="margin-top: 4px;">Meça o comprimento e a largura em metros. Para a profundidade, tire a média entre a parte mais rasa e a mais funda. Multiplique tudo por 1.000 para obter o total em litros.</div>
         </div>
       </div>
 
@@ -594,7 +711,8 @@ function calcProducts() {
 
 /* Cálculo direto de Correções */
 function calcPpm() {
-  const v = vol(); // v = volume em mil litros
+  const v = vol();
+
   if (v === null) {
     $('alkResult').textContent = 'Volume inválido';
     $('saltResult').textContent = 'Volume inválido';
@@ -604,6 +722,7 @@ function calcPpm() {
 
   // 1. Alcalinidade
   const alkCurrent = readNumber('alkPpm');
+
   if (alkCurrent === null) {
     $('alkResult').textContent = '—';
   } else if (alkCurrent >= 110) {
@@ -614,12 +733,14 @@ function calcPpm() {
     $('alkResult').textContent = `${fmt(alkGrams)} g`;
   }
 
-  // 2. Sal (Baseado em Gotas com fator fixo 0,125 e meta de 3,5 g/L)
+  // 2. Sal
   const saltDrops = readNumber('saltDrops');
+
   if (saltDrops === null) {
     $('saltResult').textContent = '—';
   } else {
     const saltPpmCurrent = saltDrops * 0.125;
+
     if (saltPpmCurrent >= 3.5) {
       $('saltResult').textContent = 'OK (Sem necessidade)';
     } else {
@@ -631,6 +752,7 @@ function calcPpm() {
 
   // 3. Dureza Cálcica
   const hardCurrent = readNumber('hardPpm');
+
   if (hardCurrent === null) {
     $('hardResult').textContent = '—';
   } else if (hardCurrent >= 250) {
@@ -667,9 +789,10 @@ document.querySelectorAll('.tab').forEach(button => {
   });
 });
 
-/* Initialization */
+/* Inicialização */
 renderProducts();
 calcPpm();
 </script>
+
 </body>
 </html>
